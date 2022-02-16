@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UniqueWords
 {
@@ -10,14 +11,22 @@ public class UniqueWords
    public static int countUnique(ArrayList<String> list)
    {
 	  int count = 0;
+	  int repeat = 0;
+	  ArrayList<String> priorRepeats = new ArrayList<>();
+	 
 	  
       for (int i = 0; i < list.size(); i++)
-      {		 for (int j = 0; j < list.size(); j++)
-		 {
-			
-		 }
+      {		
+    	  int occurances = Collections.frequency(list, list.get(i));
+    	  
+    	  if(occurances>1 && !priorRepeats.contains(list.get(i)))
+    	  {
+    		  repeat++;
+    		  priorRepeats.add(list.get(i));
+    	  }
       }
-	  return count;
+      count = list.size() - repeat;
+      return count;
    }
 
    public static void main(String[] args)
